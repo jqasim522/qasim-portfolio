@@ -1,0 +1,65 @@
+---
+import SectionLabel from './ui/SectionLabel';
+import CertIcon from './ui/CertIcon';
+
+const certs = [
+  {
+    name: 'Azure AI Fundamentals (AI-900)',
+    issuer: 'Microsoft',
+    year: '2025',
+    kind: 'badge' as const,
+    desc: 'Foundational AI: ML pipelines, Azure AI services, responsible AI',
+    verifyUrl: '/certs/AI Microsoft Certificate.PDF',
+    verifyLabel: 'Certificate PDF',
+  },
+  {
+    name: 'Artificial Intelligence',
+    issuer: 'NAVTTC',
+    year: '2024',
+    kind: 'award' as const,
+    desc: 'Applied ML: supervised learning, model evaluation, Python tooling',
+    verifyUrl: '/certs/ai.jpeg',
+    verifyLabel: 'Certificate PDF',
+  },
+];
+---
+<section id="certifications" class="sec">
+  <div class="wrap">
+    <SectionLabel reveal>CERTIFICATIONS</SectionLabel>
+    <h2 class="h2" data-reveal style="--i:1">Certifications</h2>
+    <ul class="mt-14 grid items-stretch gap-6 md:grid-cols-2">
+      {certs.map((c, i) => (
+        <li data-reveal style={`--i:${i + 2}`} class="flex">
+          <div class="card card-css group flex h-full w-full items-start gap-5 p-8">
+            <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-line-brand bg-brand/10 text-brand transition-transform duration-300 group-hover:scale-110">
+              <CertIcon kind={c.kind} />
+            </span>
+            <div class="flex min-w-0 flex-1 flex-col">
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  <p class="font-medium text-t1">{c.name}</p>
+                  <p class="text-t2">{c.issuer}</p>
+                </div>
+                <span class="mono-tag shrink-0 text-t3">{c.year}</span>
+              </div>
+              <p class="mt-3 text-[13px] leading-relaxed text-t3">{c.desc}</p>
+              {c.verifyUrl && (
+                <a
+                  href={c.verifyUrl}
+                  target="_blank"
+                  rel="noopener"
+                  class="mono-tag mt-auto inline-flex items-center gap-1 pt-3 text-brand hover:underline"
+                >
+                  {c.verifyLabel}
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 3h7v7M13 3 5 11" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

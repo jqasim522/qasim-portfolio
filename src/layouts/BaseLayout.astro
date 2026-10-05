@@ -1,0 +1,62 @@
+---
+import '../styles/global.css';
+import AuroraBackground from '../components/ui/AuroraBackground';
+import ScrollProgress from '../components/ui/ScrollProgress';
+import NoiseOverlay from '../components/ui/NoiseOverlay.astro';
+import GridOverlay from '../components/ui/GridOverlay.astro';
+interface Props { title?: string; description?: string }
+const { title = 'Qasim Javed — AI/ML Engineer', description = 'Qasim Javed is an AI/ML engineer and Software Engineering graduate from UET Lahore. RAG pipelines, voice agents and computer vision models that ship to real users.' } = Astro.props;
+const B = import.meta.env.BASE_URL.replace(/\/$/, '');
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const og = new URL(`${B}/og-image.png`, Astro.site).href;
+const ld = {
+  '@context': 'https://schema.org', '@type': 'Person', name: 'Muhammad Qasim Javed', alternateName: 'Qasim Javed',
+  jobTitle: 'AI/ML Engineer', email: 'mailto:muhammadqasimjaved19@gmail.com', url: canonical,
+  address: { '@type': 'PostalAddress', addressLocality: 'Lahore', addressCountry: 'PK' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of Engineering and Technology, Lahore' },
+  sameAs: ['https://github.com/jqasim522', 'https://linkedin.com/in/m-qasim-javed'],
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" /><meta name="theme-color" content="#080b0a" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href={`${B}/favicon.svg`} />
+  <link rel="sitemap" href={`${B}/sitemap-index.xml`} />
+  <meta property="og:type" content="website" /><meta property="og:title" content={title} />
+  <meta property="og:description" content={description} /><meta property="og:url" content={canonical} />
+  <meta property="og:image" content={og} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} /><meta name="twitter:image" content={og} />
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+  <link rel="preconnect" href="https://api.fontshare.com" /><link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500&f[]=satoshi@700,500,400&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=jetbrains-mono@500&display=swap" />
+  <script is:inline>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a href="#main" class="fixed left-3 top-3 z-[200] -translate-y-24 rounded-full bg-brand px-4 py-2 font-semibold text-base focus:translate-y-0">Skip to content</a>
+  <AuroraBackground client:idle />
+  <GridOverlay />
+  <NoiseOverlay />
+  <ScrollProgress client:load />
+  <div class="relative z-10"><slot /></div>
+  <script>
+    // Section reveals (20% visibility, stays revealed) + delegated cursor spotlight for static cards.
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.2 });
+    document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+    document.addEventListener('pointermove', (e) => {
+      const c = (e.target as Element).closest?.('.card') as HTMLElement | null;
+      if (!c) return;
+      const r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      c.style.setProperty('--my', `${e.clientY - r.top}px`);
+    }, { passive: true });
+  </script>
+</body>
+</html>

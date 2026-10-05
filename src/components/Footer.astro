@@ -1,0 +1,44 @@
+---
+import SocialIcons from './ui/SocialIcons';
+
+const links = [
+  ['about', 'About'],
+  ['experience', 'Experience'],
+  ['projects', 'Projects'],
+  ['skills', 'Skills'],
+  ['education', 'Education'],
+  ['certifications', 'Certifications'],
+  ['contact', 'Contact'],
+];
+---
+<footer>
+  <div class="flow-line" aria-hidden="true"></div>
+  <div class="wrap grid items-center gap-8 py-12 md:grid-cols-3">
+    <div class="space-y-1">
+      <p class="font-mono text-[13px] text-t3">© 2026 Muhammad Qasim Javed</p>
+      <p class="font-mono text-[11px] text-t3">
+        Built with Astro · Deployed on Vercel ·
+        <a
+          href="https://github.com/jqasim522/qasim-portfolio"
+          target="_blank"
+          rel="noopener"
+          class="u-link hover:text-brand"
+        >Source</a>
+      </p>
+    </div>
+
+    <nav aria-label="Footer" class="md:justify-self-center">
+      <ul class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-t2">
+        {links.map(([id, label]) => (
+          <li>
+            <a class="u-link inline-flex min-h-[44px] items-center" href={`#${id}`}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="md:justify-self-end">
+      <SocialIcons />
+    </div>
+  </div>
+</footer>

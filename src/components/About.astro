@@ -1,0 +1,24 @@
+---
+import SectionLabel from './ui/SectionLabel';
+const facts = [['Location', 'Lahore, Pakistan'], ['Focus', 'RAG, voice agents, computer vision'], ['Previously', 'Web3 Geeks · Bookme'], ['Speaking', 'Urdu / English']];
+---
+<section id="about" class="sec">
+  <div class="wrap grid gap-12 lg:grid-cols-3 lg:gap-16">
+    <div class="lg:col-span-2">
+      <SectionLabel reveal>ABOUT</SectionLabel>
+      <h2 class="h2" data-reveal style="--i:1">About</h2>
+      <div class="mt-12 space-y-6 text-lg text-t2">
+        <p class="dropcap" data-reveal style="--i:2">Software Engineering graduate from University of Engineering and Technology (UET), Lahore, with hands-on experience in machine learning, NLP, and computer vision. I've shipped production-grade AI systems at Web3 Geeks and Bookme, ranging from ML pipelines and RAG agents to voice systems and YOLOv8 object detectors.</p>
+        <p class="text-t1" data-reveal style="--i:3">My focus: grounded, reliable AI — systems that don't hallucinate, refuse gracefully, and integrate cleanly with real business workflows. Every project below ships with a live demo or GitHub repo.</p>
+      </div>
+    </div>
+    <div data-reveal style="--i:3" class="h-fit lg:mt-[88px]">
+      <aside class="card card-css p-8">
+        <h3 class="mono-tag uppercase tracking-[0.15em] text-t3">Quick facts</h3>
+        <dl class="mt-5 divide-y divide-white/[0.06]">
+          {facts.map(([k, v]) => <div class="py-3 first:pt-0 last:pb-0"><dt class="mono-tag uppercase text-t3">{k}</dt><dd class="mt-1 text-t1">{v}</dd></div>)}
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>

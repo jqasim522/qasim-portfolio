@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav';
+import Hero from '../components/Hero';
+import Marquee from '../components/ui/Marquee';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects';
+import Skills from '../components/Skills';
+import Education from '../components/Education.astro';
+import Certifications from '../components/Certifications.astro';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer.astro';
+const hair = 'h-px w-full bg-gradient-to-r from-transparent via-white/[0.08] to-transparent';
+// Only numbers that appear elsewhere on the page.
+const quick = ['3 projects with video demos', '775 tests shipped', '82.5% mAP@50', 'Live demo on Railway'];
+---
+<BaseLayout>
+  <Nav client:load />
+  <main id="main">
+    <Hero client:load />
+    <Marquee />
+    <ul class="wrap-none flex min-h-[48px] flex-wrap items-center justify-center gap-x-3 gap-y-1 border-b border-line-subtle px-5 py-3 text-center font-mono text-[12px] text-t3" aria-label="Quick summary">
+      {quick.map((q, i) => <><li>{q}</li>{i < quick.length - 1 && <li aria-hidden="true" class="text-brand">·</li>}</>)}
+    </ul>
+    <About />
+    <div class={hair} aria-hidden="true"></div>
+    <Experience />
+    <div class={hair} aria-hidden="true"></div>
+    <Projects client:visible />
+    <div class={hair} aria-hidden="true"></div>
+    <Skills client:visible />
+    <div class={hair} aria-hidden="true"></div>
+    <Education />
+    <div class={hair} aria-hidden="true"></div>
+    <Certifications />
+    <div class={hair} aria-hidden="true"></div>
+    <Contact client:visible />
+  </main>
+  <Footer />
+</BaseLayout>
